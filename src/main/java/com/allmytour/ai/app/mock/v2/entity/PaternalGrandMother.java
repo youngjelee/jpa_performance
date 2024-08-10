@@ -1,0 +1,16 @@
+package com.allmytour.ai.app.mock.v2.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Table(name = "paternal_grand_mother")
+@Data
+public class PaternalGrandMother {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "paternal_grand_mother_id")
+    private Long id;
+
+    private String name;
+}

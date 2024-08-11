@@ -1,7 +1,9 @@
 package com.allmytour.ai.app.mock.v2.controller;
 
+import com.allmytour.ai.app.mock.v2.dto.res.PaternalGrandFatherResponse;
 import com.allmytour.ai.app.mock.v2.entity.Baby;
 import com.allmytour.ai.app.mock.v2.entity.Father;
+import com.allmytour.ai.app.mock.v2.entity.PaternalGrandFather;
 import com.allmytour.ai.app.mock.v2.repository.BabyRepository;
 import com.allmytour.ai.app.mock.v2.repository.FatherRepository;
 import com.allmytour.ai.app.mock.v2.service.MockService;
@@ -72,6 +74,33 @@ public class MockController {
         return mockService.getBabyByCondition_v3(name, fatherName, motherName, pageable);
     }
 
+    @GetMapping("/getFather-v1/{id}")
+    public Father getFather_v1(@PathVariable("id") Long id ) throws Exception{
+        Father f = mockService.getFatherById_v1(id);
+        return f;
+    }
+
+    @GetMapping("/getFather-v2/{id}")
+    public Father getFather_v2(@PathVariable("id") Long id ) throws Exception{
+        Father f = mockService.getFatherById_v2(id);
+        return f;
+    }
+
+    @GetMapping("/getPaternalGrandFather/{id}")
+    public PaternalGrandFather getPaternalGrandFather(@PathVariable("id") Long id ) throws Exception{
+        PaternalGrandFather f = mockService.getPaternalGrandFather(id);
+
+
+        return f;
+    }
+
+    @GetMapping("/getPaternalGrandFather-v2/{id}")
+    public PaternalGrandFatherResponse getPaternalGrandFather_v2(@PathVariable("id") Long id ) throws Exception{
+        PaternalGrandFatherResponse f = mockService.getPaternalGrandFather_v2(id);
+
+
+        return f;
+    }
 
 
 }

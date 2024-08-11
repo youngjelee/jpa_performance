@@ -2,7 +2,6 @@ package com.allmytour.ai.app.mock.v2.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,12 +9,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "family")
-
-public class Family {
+@Table(name = "friends")
+public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "family_id")
+    @Column(name = "friend_id")
     private Long id;
 
     private String name;

@@ -68,10 +68,10 @@ public class MockService {
     @Transactional
     public Father getFatherById_v2( Long id ) throws Exception {
 
-        Father f =  fatherRepository.getFatherById(id);
+//        Father f =  fatherRepository.getFatherById(id);
 //        System.out.println(f) ;
 
-        return f;
+        return null;
     }
 
     public PaternalGrandFather getPaternalGrandFather (Long id ) {

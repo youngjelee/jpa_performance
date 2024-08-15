@@ -5,7 +5,6 @@ import com.allmytour.ai.app.mock.v2.entity.Baby;
 import com.allmytour.ai.app.mock.v2.entity.Father;
 import com.allmytour.ai.app.mock.v2.entity.PaternalGrandFather;
 import com.allmytour.ai.app.mock.v2.repository.BabyRepository;
-import com.allmytour.ai.app.mock.v2.repository.FatherRepository;
 import com.allmytour.ai.app.mock.v2.repository.PaternalFatherRepository;
 import com.allmytour.ai.app.mock.v2.specification.BabySpecification;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +20,6 @@ import java.util.List;
 public class MockService {
 
     private final BabyRepository babyRepository;
-    private final FatherRepository fatherRepository;
     private final PaternalFatherRepository paternalFatherRepository;
 
     // [TYPE:1 ]  Specitfication 이용한방법
@@ -58,21 +51,8 @@ public class MockService {
     }
 
 
-    public Father getFatherById_v1( Long id ) throws Exception {
 
-        Father f = fatherRepository.findById(id).orElseThrow( ()->   new RuntimeException("father 없음") );
 
-        return f;
-    }
-
-    @Transactional
-    public Father getFatherById_v2( Long id ) throws Exception {
-
-        Father f =  fatherRepository.getFatherById(id);
-//        System.out.println(f) ;
-
-        return f;
-    }
 
     public PaternalGrandFather getPaternalGrandFather (Long id ) {
 

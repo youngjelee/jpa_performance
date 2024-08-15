@@ -25,6 +25,6 @@ public class GptController {
 
     @GetMapping("/getWeather")
     public String getWeather() {
-        return "";
+        return "good";
     }
 }

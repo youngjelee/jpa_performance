@@ -1,6 +1,12 @@
 package com.allmytour.ai;
 
 import com.allmytour.ai.app.mock.v3.dto.ItemDto;
+import com.allmytour.ai.app.mock.v3.entity.JoinData;
+import com.allmytour.ai.app.mock.v3.entity.NoForienTest;
+import com.allmytour.ai.app.mock.v3.entity.Test1;
+//import com.allmytour.ai.app.mock.v3.repository.NoForeienRepository;
+import com.allmytour.ai.app.mock.v3.repository.NoForeienRepository;
+import com.allmytour.ai.app.mock.v3.repository.Test1Repository;
 import com.allmytour.ai.app.mock.v3.service.V3Service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +21,24 @@ public class V3Test {
 
     @Autowired
     V3Service v3Service;
+
+    @Autowired
+    Test1Repository test1Repository;
+
+    @Autowired
+    NoForeienRepository noForeienRepository;
+
+
+    @Test
+    public void getJoinData(){
+
+        List<JoinData> list =
+        noForeienRepository.getJoinData(100L , "noForigenTest_10");
+
+        System.out.println(list);
+    }
+
+
 
     @Test
     public void saveOrder(){
@@ -41,6 +65,29 @@ public class V3Test {
         v3Service.makeOrder( 5L , orderList  );
 
     }
+
+    @Test
+    public void make1000NoFor() {
+
+        List<NoForienTest> list = new ArrayList<>();
+
+        for (int i = 1; i < 15000; i++) {
+            Test1 t = test1Repository.findById((long) i).get();
+
+            NoForienTest noForienTest = new NoForienTest();
+            noForienTest.setName("noForigenTest_" + i);
+            noForienTest.setTest1id(t.getId());
+            list.add(noForienTest);
+        }
+        noForeienRepository.saveAll(list);
+
+    }
+
+    @Test
+    public void test1(){
+        System.out.print(11111);
+    }
+
 
 
 

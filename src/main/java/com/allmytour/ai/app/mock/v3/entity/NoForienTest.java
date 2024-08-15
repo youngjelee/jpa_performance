@@ -5,13 +5,14 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Test5 {
+public class NoForienTest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    @ManyToOne( fetch = FetchType.LAZY)
-    @JoinColumn(name = "test4_id")
-    private Test4 test4;
+
+    private Long test1id;
+
 }

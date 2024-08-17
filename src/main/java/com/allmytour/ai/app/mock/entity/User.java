@@ -1,13 +1,18 @@
-package com.allmytour.ai.app.mock;
+package com.allmytour.ai.app.mock.entity;
 
 import jakarta.persistence.*;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity @Setter
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class User {
 
        @Id
@@ -25,6 +30,9 @@ public class User {
 
     @OneToMany( mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserRole> userRoles = new ArrayList<>();
+
+    @Embedded
+    private Address address;
 
 
     public void addRole(Role role) {

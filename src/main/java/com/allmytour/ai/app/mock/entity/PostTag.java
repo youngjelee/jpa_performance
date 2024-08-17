@@ -1,10 +1,16 @@
-package com.allmytour.ai.app.mock;
+package com.allmytour.ai.app.mock.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class PostTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +25,5 @@ public class PostTag {
     private Tag tag;
 
     // 추가적인 속성 (예: 생성일, 상태 등)
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 }

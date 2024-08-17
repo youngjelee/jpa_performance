@@ -1,7 +1,14 @@
-package com.allmytour.ai.app.mock;
+package com.allmytour.ai.app.mock.entity;
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.*;
 @Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tag {
 
     @Id
@@ -10,6 +17,6 @@ public class Tag {
 
     private String name;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostTag> posts = new ArrayList<>();
 }

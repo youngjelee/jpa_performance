@@ -1,6 +1,11 @@
-package com.allmytour.ai.app.mock;
-import jakarta.persistence.*;import java.util.*;
+package com.allmytour.ai.app.mock.entity;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class Profile {
 
     @Id

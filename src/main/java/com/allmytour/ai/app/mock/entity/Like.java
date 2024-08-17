@@ -1,10 +1,13 @@
-package com.allmytour.ai.app.mock;
+package com.allmytour.ai.app.mock.entity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.*;
 @Entity
-public class Friendship {
+@Table( name="likes")
+ @Getter
+@Setter
+public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +18,6 @@ public class Friendship {
     private User user;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "friend_id")
-    private User friend;
-
-    private LocalDateTime createdDate;
+    @JoinColumn(name = "post_id")
+    private Post post;
 }

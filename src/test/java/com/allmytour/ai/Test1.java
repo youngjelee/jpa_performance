@@ -1,11 +1,17 @@
 package com.allmytour.ai;
 
 import com.allmytour.ai.app.mock.dto.CommentDTO;
+import com.allmytour.ai.app.mock.dto.PostResponseDto;
 import com.allmytour.ai.app.mock.entity.*;
 import com.allmytour.ai.app.mock.repository.*;
+import com.allmytour.ai.app.mock.service.TestService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +30,98 @@ public class Test1 {
     @Autowired CommentRepository commentRepository;
     @Autowired PostTagRepository postTagRepository;
     @Autowired TagRepository tagRepository;
+    @Autowired LikeRepository likeRepository;
+    @Autowired UserFriendRepository userFriendRepository;
+    @Autowired TestService testService;
 
+    @Test
+    public void getPostCrietriaPaging(){
+         Pageable pageable = PageRequest.of(1, 10); // 첫 번째 페이지, 10개 항목
+         Page<PostResponseDto> result = testService.getPostResponseList( 1L , pageable);
+
+         System.out.println("=======================================================");
+
+         Pageable pageable2 = PageRequest.of(2, 10); // 첫 번째 페이지, 10개 항목
+         Page<PostResponseDto> result2 = testService.getPostResponseList( 1L , pageable2);
+
+         System.out.println("==================================================================");
+
+    }
+
+
+    @Test
+    public void getPostCriteria(){
+        // 페이지 번호(0부터 시작)와 페이지 크기(한 페이지당 데이터 개수)를 지정
+        Pageable pageable = PageRequest.of(0, 10); // 첫 번째 페이지, 10개 항목
+
+        List<PostResponseDto> result =
+        postRepository.getListPostResponseDto(1L ,pageable);
+        System.out.println("================");
+        System.out.println(result);
+
+
+        // 정렬 옵션을 추가하여 페이지 요청 생성 (예: 'createdDate'를 기준으로 내림차순 정렬)
+        Pageable pageableWithSort = PageRequest.of(0, 10, Sort.by("createdDate").descending());
+
+        List<PostResponseDto> result2 =
+        postRepository.getListPostResponseDto(1L ,pageableWithSort);
+
+        System.out.println("================");
+        System.out.println(result2);
+
+
+
+    }
+
+    @Test
+    public void getFriend () {
+
+    }
+
+    @Test
+    public void createFriend(){
+        for(int i =1 ; i < 100 ; i ++ ) {
+            for(int j = 1 ; j < 100 ; j++ ) {
+                if( j != i ) {
+                    User u = userRepository.findById((long)i).get();
+                    User friend = userRepository.findById((long)j ).get();
+
+                    UserFriend uf = UserFriend.builder()
+                            .user( u)
+                            .friend(friend)
+                            .build();
+                    userFriendRepository.save(uf);
+                }
+            }
+        }
+    }
+
+
+    @Test
+    public void likeCommentJoinTest(){
+        likeRepository.getLikeJoinData();
+        System.out.println("===");
+    }
+
+    @Test
+    public void pushLikes(){
+
+            for(int i = 1 ;i < 100 ; i++ ) {
+                for (int j = 4 ; j< 100 ; j++ ) {
+                    User user = userRepository.findById((long)i).get();
+                    Post post = postRepository.findById((long)j).get();
+                    Like like = Like.builder().user(user).post(post).build();
+                    likeRepository.save(like);
+                }
+            }
+
+    }
+
+
+    @Test
+    public void getPostTag(){
+
+    }
 
 
     @Test
@@ -166,23 +263,32 @@ public class Test1 {
     }
 
     @Test
+    public void getUserTest(){
+         int j = 1;
+         User u = userRepository.findById((long)j).get();
+        System.out.println("====");
+    }
+
+    @Test
     public void createComment(){
 
-//        List<Post> postList = postRepository.findAll()
-//
-//        for (Post p : postList ) {
-//            Comment c = new Comment();
-//        }
-        Post p = postRepository.findById(1L).get();
-        User u = userRepository.findById(1L).get();
 
-        Comment c = Comment.builder()
-                .content("댓글1")
-                .user(u)
-                .post(p)
-                .build();
-        commentRepository.save(c);
 
+        for(int i = 4 ; i<100 ; i ++ ) {
+            for ( int j = 1 ; j < 100 ; j++ ) {
+
+                User u = userRepository.findById((long) j ).get();
+                Post p = postRepository.findById((long)i).get();
+
+                Comment c = Comment.builder()
+                        .content("코멘트_"+i+"_"+j)
+                        .user(u)
+                        .post(p)
+                        .build();
+                commentRepository.save(c);
+
+            }
+        }
     }
 
     @Test

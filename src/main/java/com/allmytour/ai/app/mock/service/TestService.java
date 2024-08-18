@@ -1,13 +1,18 @@
 package com.allmytour.ai.app.mock.service;
 
+import com.allmytour.ai.app.mock.dto.PostResponseDto;
 import com.allmytour.ai.app.mock.entity.Comment;
 import com.allmytour.ai.app.mock.entity.Post;
 import com.allmytour.ai.app.mock.entity.User;
 import com.allmytour.ai.app.mock.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 @Transactional
@@ -42,8 +47,12 @@ public class TestService {
 
         System.out.println("====================") ;
 
+    }
 
-
+    public Page<PostResponseDto> getPostResponseList(Long userId , Pageable pageable) {
+       List<PostResponseDto> responseDtos =  postRepository.getListPostResponseDto(userId , pageable);
+        Long count = postRepository.getListPostResponseDtoLongCount(userId , pageable);
+        return new PageImpl<>( responseDtos , pageable , count ) ;
     }
 
 

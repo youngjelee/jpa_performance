@@ -1,12 +1,13 @@
 package com.allmytour.ai.app.mock.repository;
 
 import com.allmytour.ai.app.mock.entity.Post;
-import com.allmytour.ai.app.mock.entity.User;
+import com.allmytour.ai.app.mock.repository.custom.PostRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+
+public interface PostRepository extends JpaRepository<Post, Long> , PostRepositoryCustom {
 
 //    List<Post>
 

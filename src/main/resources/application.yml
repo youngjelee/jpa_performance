@@ -7,7 +7,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://49.50.167.118:3306/jpa_performance?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&serverTimezone=Asia/Seoul&useSSL=false
     username: root
-    password: Dlwpdud123!@#
+    password:  
     hikari:
       maximum-pool-size: 20
 
